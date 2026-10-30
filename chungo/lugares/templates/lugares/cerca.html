@@ -1,0 +1,187 @@
+{% extends "lugares/base.html" %}
+
+{% block titulo %}Cerca de ti · El camino del chungo{% endblock %}
+
+{% block estilos %}
+<style>
+    .lugar-cercano {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+    .lugar-cercano img,
+    .lugar-cercano .sin-foto {
+        width: 90px;
+        height: 90px;
+        flex-shrink: 0;
+        object-fit: cover;
+        border-radius: 10px;
+        font-size: 13px;
+        padding: 6px;
+    }
+    .lugar-cercano h2 {
+        font-size: 20px;
+        margin: 0 0 4px;
+    }
+    .lugar-cercano p {
+        margin: 0 0 8px;
+        color: var(--texto-suave);
+    }
+    .lugar-cercano .boton { margin: 0; }
+    .detalle-gps {
+        font-size: 14px;
+        color: var(--texto-suave);
+    }
+</style>
+{% endblock %}
+
+{% block contenido %}
+<h1>Cerca de ti</h1>
+<p>Camina por Santiago Centro. Cuando estés a {{ radio_metros }} metros o menos de un lugar histórico, aparecerá aquí para que lo desbloquees.</p>
+
+<button type="button" class="boton" id="boton-buscar">Buscar lugares cerca de mí</button>
+
+<div id="mensaje" class="mensaje oculto"></div>
+<div id="resultados"></div>
+<p id="detalle-gps" class="detalle-gps"></p>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const URL_API = "{% url 'api_lugares' %}";
+    const PRECISION_MAXIMA = 100;  // metros: si el GPS es peor que esto, avisamos
+
+    let RADIO_METROS = {{ radio_metros }};  // viene de views.py (RADIO_METROS)
+    let lugares = [];
+    let vigilancia = null;
+
+    const botonBuscar = document.getElementById("boton-buscar");
+    const cajaMensaje = document.getElementById("mensaje");
+    const cajaResultados = document.getElementById("resultados");
+    const detalleGps = document.getElementById("detalle-gps");
+
+    function mostrarMensaje(texto) {
+        cajaMensaje.textContent = texto;
+        cajaMensaje.classList.remove("oculto");
+    }
+
+    function ocultarMensaje() {
+        cajaMensaje.classList.add("oculto");
+    }
+
+    // Fórmula de Haversine: distancia en metros entre dos puntos de la Tierra
+    function distanciaMetros(lat1, lon1, lat2, lon2) {
+        const R = 6371000;  // radio de la Tierra en metros
+        const aRad = grados => grados * Math.PI / 180;
+        const dLat = aRad(lat2 - lat1);
+        const dLon = aRad(lon2 - lon1);
+        const a = Math.sin(dLat / 2) ** 2 +
+                  Math.cos(aRad(lat1)) * Math.cos(aRad(lat2)) * Math.sin(dLon / 2) ** 2;
+        return 2 * R * Math.asin(Math.sqrt(a));
+    }
+
+    function tarjetaLugar(lugar) {
+        const tarjeta = document.createElement("div");
+        tarjeta.className = "tarjeta lugar-cercano";
+
+        if (lugar.foto) {
+            const img = document.createElement("img");
+            img.src = lugar.foto;
+            img.alt = "Foto de " + lugar.nombre;
+            tarjeta.appendChild(img);
+        } else {
+            const sinFoto = document.createElement("div");
+            sinFoto.className = "sin-foto";
+            sinFoto.textContent = "Sin foto";
+            tarjeta.appendChild(sinFoto);
+        }
+
+        const texto = document.createElement("div");
+        const titulo = document.createElement("h2");
+        titulo.textContent = lugar.nombre;
+        const distancia = document.createElement("p");
+        distancia.textContent = "Estás a " + Math.round(lugar.distancia) + " metros";
+        const enlace = document.createElement("a");
+        enlace.className = "boton";
+        enlace.href = lugar.url;
+        enlace.textContent = "Desbloquear";
+
+        texto.append(titulo, distancia, enlace);
+        tarjeta.appendChild(texto);
+        return tarjeta;
+    }
+
+    function revisarUbicacion(posicion) {
+        const lat = posicion.coords.latitude;
+        const lon = posicion.coords.longitude;
+        const precision = posicion.coords.accuracy;
+
+        // Calcula la distancia a cada lugar y los ordena del más cercano al más lejano
+        const conDistancia = lugares
+            .map(lugar => ({ ...lugar, distancia: distanciaMetros(lat, lon, lugar.latitud, lugar.longitud) }))
+            .sort((a, b) => a.distancia - b.distancia);
+        const cercanos = conDistancia.filter(lugar => lugar.distancia <= RADIO_METROS);
+
+        detalleGps.textContent = "Tu ubicación: " + lat.toFixed(5) + ", " + lon.toFixed(5) +
+            " (precisión de unos " + Math.round(precision) + " m)";
+
+        cajaResultados.innerHTML = "";
+        cercanos.forEach(lugar => cajaResultados.appendChild(tarjetaLugar(lugar)));
+
+        if (precision > PRECISION_MAXIMA) {
+            mostrarMensaje("Tu ubicación es imprecisa (unos " + Math.round(precision) +
+                " m de error). Sal a un lugar abierto o activa el GPS del celular para mejorarla.");
+        } else if (cercanos.length === 0 && conDistancia.length > 0) {
+            const masCercano = conDistancia[0];
+            mostrarMensaje("No hay lugares históricos a menos de " + RADIO_METROS + " metros. El más cercano es " +
+                masCercano.nombre + ", a " + Math.round(masCercano.distancia) + " metros. ¡Sigue caminando!");
+        } else if (cercanos.length === 0) {
+            mostrarMensaje("Todavía no hay lugares cargados en la app.");
+        } else {
+            ocultarMensaje();
+        }
+    }
+
+    function errorUbicacion(error) {
+        if (error.code === error.PERMISSION_DENIED) {
+            mostrarMensaje("No nos diste permiso para ver tu ubicación. Toca el candado de la barra de direcciones, " +
+                "elige \"Permitir ubicación\" y vuelve a tocar el botón.");
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
+            mostrarMensaje("No pudimos encontrar tu ubicación. Revisa que el GPS del celular esté encendido.");
+        } else if (error.code === error.TIMEOUT) {
+            mostrarMensaje("El GPS está tardando mucho. Sal a un lugar abierto y vuelve a intentarlo.");
+        } else {
+            mostrarMensaje("Hubo un problema al obtener tu ubicación. Inténtalo de nuevo.");
+        }
+    }
+
+    async function empezar() {
+        if (!("geolocation" in navigator)) {
+            mostrarMensaje("Tu navegador no puede entregar la ubicación (sin GPS). Prueba con Chrome en el celular.");
+            return;
+        }
+
+        mostrarMensaje("Buscando tu ubicación…");
+
+        try {
+            const respuesta = await fetch(URL_API);
+            const datos = await respuesta.json();
+            lugares = datos.lugares;
+            RADIO_METROS = datos.radio_metros;
+        } catch (e) {
+            mostrarMensaje("No pudimos cargar los lugares. Revisa tu conexión a internet.");
+            return;
+        }
+
+        if (vigilancia !== null) navigator.geolocation.clearWatch(vigilancia);
+        vigilancia = navigator.geolocation.watchPosition(revisarUbicacion, errorUbicacion, {
+            enableHighAccuracy: true,
+            maximumAge: 5000,
+            timeout: 20000,
+        });
+        botonBuscar.textContent = "Buscando lugares mientras caminas…";
+    }
+
+    botonBuscar.addEventListener("click", empezar);
+</script>
+{% endblock %}

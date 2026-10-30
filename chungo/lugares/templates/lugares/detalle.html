@@ -1,0 +1,154 @@
+{% extends "lugares/base.html" %}
+
+{% block titulo %}{{ lugar.nombre }} · El camino del chungo{% endblock %}
+
+{% block contenido %}
+<article class="tarjeta">
+    {% if lugar.foto %}
+        <img class="foto" src="{{ lugar.foto.url }}" alt="Foto de {{ lugar.nombre }}">
+    {% else %}
+        <div class="sin-foto">Este lugar todavía no tiene foto</div>
+    {% endif %}
+
+    <h1>{{ lugar.nombre }}</h1>
+
+    <button type="button" class="boton" id="boton-leer">Leer</button>
+    <button type="button" class="boton" id="boton-escuchar">Escuchar</button>
+    <button type="button" class="boton secundario" id="boton-no-leer">No leer</button>
+
+    <!-- Controles de la voz: aparecen al tocar "Escuchar" -->
+    <div id="controles-voz" class="oculto">
+        <p id="estado-voz" class="mensaje">Leyendo en voz alta…</p>
+        <div class="fila-botones">
+            <button type="button" class="boton secundario" id="boton-pausar">Pausar</button>
+            <button type="button" class="boton secundario" id="boton-reanudar" disabled>Reanudar</button>
+            <button type="button" class="boton secundario" id="boton-detener">Detener</button>
+        </div>
+    </div>
+
+    <!-- Texto de la descripción: aparece al tocar "Leer" -->
+    <div id="texto-descripcion" class="oculto">
+        {{ lugar.descripcion|linebreaks }}
+    </div>
+</article>
+
+{{ lugar.descripcion|json_script:"descripcion-lugar" }}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const descripcion = JSON.parse(document.getElementById("descripcion-lugar").textContent);
+    const URL_LISTA = "{% url 'lista' %}";
+
+    const botonLeer = document.getElementById("boton-leer");
+    const botonEscuchar = document.getElementById("boton-escuchar");
+    const botonNoLeer = document.getElementById("boton-no-leer");
+    const textoDescripcion = document.getElementById("texto-descripcion");
+    const controlesVoz = document.getElementById("controles-voz");
+    const estadoVoz = document.getElementById("estado-voz");
+    const botonPausar = document.getElementById("boton-pausar");
+    const botonReanudar = document.getElementById("boton-reanudar");
+    const botonDetener = document.getElementById("boton-detener");
+
+    // ---------- Botón "Leer" ----------
+    botonLeer.addEventListener("click", function () {
+        // toggle devuelve true si el texto quedó oculto
+        const quedoOculto = textoDescripcion.classList.toggle("oculto");
+        botonLeer.textContent = quedoOculto ? "Leer" : "Ocultar texto";
+    });
+
+    // ---------- Botón "No leer": vuelve a la pantalla anterior ----------
+    botonNoLeer.addEventListener("click", function () {
+        detenerVoz();
+        if (history.length > 1) {
+            history.back();
+        } else {
+            window.location.href = URL_LISTA;
+        }
+    });
+
+    // ---------- Botón "Escuchar" (voz del navegador) ----------
+    const hayVoz = "speechSynthesis" in window;
+    let vozElegida = null;
+
+    function elegirVoz() {
+        const voces = window.speechSynthesis.getVoices();
+        vozElegida =
+            voces.find(v => v.lang === "es-CL" || v.lang === "es_CL") ||
+            voces.find(v => v.lang === "es-ES" || v.lang === "es_ES") ||
+            voces.find(v => v.lang.toLowerCase().startsWith("es")) ||
+            null;
+    }
+
+    if (hayVoz) {
+        elegirVoz();
+        // En Chrome las voces se cargan un poco después
+        window.speechSynthesis.onvoiceschanged = elegirVoz;
+    } else {
+        botonEscuchar.disabled = true;
+        botonEscuchar.textContent = "Escuchar (tu navegador no lo permite)";
+    }
+
+    // Chrome corta los textos largos, por eso se lee de a una oración
+    function dividirEnOraciones(texto) {
+        return texto
+            .replace(/\s+/g, " ")
+            .split(/(?<=[.!?])\s+/)
+            .filter(parte => parte.trim().length > 0);
+    }
+
+    function hablar() {
+        window.speechSynthesis.cancel();
+        const oraciones = dividirEnOraciones(descripcion);
+
+        oraciones.forEach(function (oracion, indice) {
+            const frase = new SpeechSynthesisUtterance(oracion);
+            frase.lang = vozElegida ? vozElegida.lang.replace("_", "-") : "es-CL";
+            if (vozElegida) frase.voice = vozElegida;
+            frase.rate = 1;
+
+            if (indice === oraciones.length - 1) {
+                frase.onend = function () {
+                    estadoVoz.textContent = "Terminó la lectura.";
+                    botonPausar.disabled = true;
+                    botonReanudar.disabled = true;
+                };
+            }
+            window.speechSynthesis.speak(frase);
+        });
+
+        controlesVoz.classList.remove("oculto");
+        estadoVoz.textContent = "Leyendo en voz alta…";
+        botonPausar.disabled = false;
+        botonReanudar.disabled = true;
+    }
+
+    function detenerVoz() {
+        if (hayVoz) window.speechSynthesis.cancel();
+    }
+
+    botonEscuchar.addEventListener("click", hablar);
+
+    botonPausar.addEventListener("click", function () {
+        window.speechSynthesis.pause();
+        estadoVoz.textContent = "En pausa.";
+        botonPausar.disabled = true;
+        botonReanudar.disabled = false;
+    });
+
+    botonReanudar.addEventListener("click", function () {
+        window.speechSynthesis.resume();
+        estadoVoz.textContent = "Leyendo en voz alta…";
+        botonPausar.disabled = false;
+        botonReanudar.disabled = true;
+    });
+
+    botonDetener.addEventListener("click", function () {
+        detenerVoz();
+        controlesVoz.classList.add("oculto");
+    });
+
+    // Si la persona sale de la página, se calla la voz
+    window.addEventListener("pagehide", detenerVoz);
+</script>
+{% endblock %}

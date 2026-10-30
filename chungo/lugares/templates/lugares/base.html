@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}El camino del chungo{% endblock %}</title>
+    <style>
+        /* Colores: versión clara azulada */
+        :root {
+            --fondo: #eef4fb;
+            --tarjeta: #ffffff;
+            --texto: #1c2b3a;
+            --texto-suave: #4a5d70;
+            --principal: #1f5f9e;
+            --principal-texto: #ffffff;
+            --secundario: #d6e4f3;
+            --secundario-texto: #1c2b3a;
+            --borde: #c3d4e6;
+            --barra: #1f5f9e;
+            --barra-texto: #ffffff;
+        }
+        /* Colores: versión oscura café */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --fondo: #1e1813;
+                --tarjeta: #2b221b;
+                --texto: #f1e6da;
+                --texto-suave: #c9b8a6;
+                --principal: #c8894b;
+                --principal-texto: #1e1813;
+                --secundario: #3d3127;
+                --secundario-texto: #f1e6da;
+                --borde: #4d3e31;
+                --barra: #2b221b;
+                --barra-texto: #f1e6da;
+            }
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            font-size: 18px;
+            line-height: 1.5;
+            background: var(--fondo);
+            color: var(--texto);
+        }
+
+        /* Barra de navegación */
+        .barra {
+            background: var(--barra);
+            color: var(--barra-texto);
+            padding: 10px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 16px;
+        }
+        .barra .marca {
+            font-weight: bold;
+            font-size: 20px;
+            color: var(--barra-texto);
+            text-decoration: none;
+            margin-right: auto;
+        }
+        .barra nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .barra nav a {
+            color: var(--barra-texto);
+            text-decoration: none;
+            padding: 10px 12px;
+            border-radius: 8px;
+        }
+        .barra nav a:hover { background: rgba(255, 255, 255, 0.15); }
+
+        main {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        h1 { font-size: 26px; line-height: 1.2; margin: 8px 0 16px; }
+
+        .tarjeta {
+            background: var(--tarjeta);
+            border: 1px solid var(--borde);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        /* Botones grandes, fáciles de tocar */
+        .boton {
+            display: block;
+            width: 100%;
+            min-height: 52px;
+            padding: 12px 16px;
+            margin: 0 0 10px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            background: var(--principal);
+            color: var(--principal-texto);
+        }
+        .boton.secundario {
+            background: var(--secundario);
+            color: var(--secundario-texto);
+        }
+        .boton:disabled { opacity: 0.5; cursor: default; }
+
+        .fila-botones {
+            display: flex;
+            gap: 10px;
+        }
+        .fila-botones .boton { flex: 1; }
+
+        /* Fotos y recuadro de reemplazo cuando no hay foto */
+        .foto {
+            width: 100%;
+            max-height: 320px;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+        }
+        .sin-foto {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            border: 2px dashed var(--borde);
+            background: var(--secundario);
+            color: var(--texto-suave);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 16px;
+        }
+
+        .mensaje {
+            background: var(--secundario);
+            border-left: 5px solid var(--principal);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .oculto { display: none !important; }
+    </style>
+    {% block estilos %}{% endblock %}
+</head>
+<body>
+    <header class="barra">
+        <a class="marca" href="{% url 'lista' %}">El camino del chungo</a>
+        <nav>
+            <a href="{% url 'cerca' %}">Cerca de ti</a>
+            <a href="{% url 'lista' %}">Lugares</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -3,8 +3,8 @@
   "model": "lugares.lugar",
   "pk": 1,
   "fields": {
-    "nombre": "Cerro Santa LucÌa",
-    "descripcion": "El Cerro Santa LucÌa est· en pleno centro de Santiago y es un lugar muy bonito para pasear y disfrutar de la naturaleza. Tiene jardines, escaleras, fuentes y miradores desde donde se puede ver la ciudad. Antiguamente, los pueblos originarios lo llamaban HuelÈn. En 1541, Pedro de Valdivia le puso el nombre de Santa LucÌa y fundÛ Santiago a sus pies. M·s adelante, BenjamÌn VicuÒa Mackenna lo transformÛ en un paseo p˙blico. Hoy es un lugar ideal para caminar, sacar fotos y conocer un poco m·s de la historia de Santiago.",
+    "nombre": "Cerro Santa Luc√≠a",
+    "descripcion": "El Cerro Santa Luc√≠a est√° en pleno centro de Santiago y es un lugar muy bonito para pasear y disfrutar de la naturaleza. Tiene jardines, escaleras, fuentes y miradores desde donde se puede ver la ciudad. Antiguamente, los pueblos originarios lo llamaban Huel√©n. En 1541, Pedro de Valdivia le puso el nombre de Santa Luc√≠a y fund√≥ Santiago a sus pies. M√°s adelante, Benjam√≠n Vicu√±a Mackenna lo transform√≥ en un paseo p√∫blico. Hoy es un lugar ideal para caminar, sacar fotos y conocer un poco m√°s de la historia de Santiago.",
     "foto": "lugares/cerrosanta.jpeg",
     "latitud": -33.440259,
     "longitud": -70.653633
@@ -15,10 +15,10 @@
   "pk": 2,
   "fields": {
     "nombre": "Barrio Lastarrias",
-    "descripcion": "El barrio Lastarria est· ubicado en el centro de Santiago y es conocido por sus calles bonitas, sus cafÈs, restaurantes y tiendas de artesanÌa. Es un lugar con mucho encanto, donde se mezclan edificios antiguos con espacios culturales y modernos. Su historia se remonta al siglo XIX y, con el tiempo, se convirtiÛ en un punto de encuentro para artistas, turistas y vecinos. Hoy es ideal para caminar, comer algo rico, visitar museos y disfrutar de su ambiente tranquilo y entretenido.\r\n\r\nTiene un ambiente bohemio y cultural, con m˙sica, ferias y artistas que le dan vida a sus calles. Adem·s, su historia comenzÛ a tomar forma en el siglo XIX, especialmente con la construcciÛn de la Iglesia de la Veracruz en 1857. Es un barrio ideal para conocer una parte m·s artÌstica y entretenida de Santiago.",
+    "descripcion": "El barrio Lastarria est√° ubicado en el centro de Santiago y es conocido por sus calles bonitas, sus caf√©s, restaurantes y tiendas de artesan√≠a. Es un lugar con mucho encanto, donde se mezclan edificios antiguos con espacios culturales y modernos. Su historia se remonta al siglo XIX y, con el tiempo, se convirti√≥ en un punto de encuentro para artistas, turistas y vecinos. Hoy es ideal para caminar, comer algo rico, visitar museos y disfrutar de su ambiente tranquilo y entretenido.\r\n\r\nTiene un ambiente bohemio y cultural, con m√∫sica, ferias y artistas que le dan vida a sus calles. Adem√°s, su historia comenz√≥ a tomar forma en el siglo XIX, especialmente con la construcci√≥n de la Iglesia de la Veracruz en 1857. Es un barrio ideal para conocer una parte m√°s art√≠stica y entretenida de Santiago.",
     "foto": "lugares/barriolastarrias.jpeg",
     "latitud": -33.437965,
-    "longitud": -70641014.0
+    "longitud": -70.641014
   }
 },
 {
@@ -26,7 +26,7 @@
   "pk": 3,
   "fields": {
     "nombre": "Museo de bellas artes",
-    "descripcion": "El Museo Nacional de Bellas Artes est· ubicado en el Parque Forestal, en Santiago. Es un lugar muy bonito, conocido por su gran edificio, su c˙pula de vidrio y sus exposiciones de arte. Fue fundado en 1880 y su edificio actual se inaugurÛ en 1910, diseÒado por el arquitecto Emilio JÈquier. En su interior se pueden encontrar pinturas, esculturas y obras de artistas chilenos y extranjeros. Es un espacio ideal para disfrutar del arte, aprender sobre la cultura y pasear por sus alrededores.",
+    "descripcion": "El Museo Nacional de Bellas Artes est√° ubicado en el Parque Forestal, en Santiago. Es un lugar muy bonito, conocido por su gran edificio, su c√∫pula de vidrio y sus exposiciones de arte. Fue fundado en 1880 y su edificio actual se inaugur√≥ en 1910, dise√±ado por el arquitecto Emilio J√©quier. En su interior se pueden encontrar pinturas, esculturas y obras de artistas chilenos y extranjeros. Es un espacio ideal para disfrutar del arte, aprender sobre la cultura y pasear por sus alrededores.",
     "foto": "lugares/bellas_artes.jpeg",
     "latitud": -33.4353,
     "longitud": -70.6436
@@ -37,7 +37,7 @@
   "pk": 4,
   "fields": {
     "nombre": "Mercado Central de Santiago",
-    "descripcion": "El Mercado Central de Santiago es un lugar muy conocido por su ambiente animado y su rica comida, especialmente los pescados y mariscos. Est· ubicado cerca del rÌo Mapocho y destaca por su estructura de hierro y su estilo antiguo. Fue inaugurado en 1872 y con los aÒos se convirtiÛ en un lugar tradicional de la ciudad. Al recorrerlo, puedes encontrar restaurantes, puestos de productos frescos y platos tÌpicos chilenos. Es un buen lugar para conocer la gastronomÌa local y disfrutar de una parte de la cultura de Santiago.",
+    "descripcion": "El Mercado Central de Santiago es un lugar muy conocido por su ambiente animado y su rica comida, especialmente los pescados y mariscos. Est√° ubicado cerca del r√≠o Mapocho y destaca por su estructura de hierro y su estilo antiguo. Fue inaugurado en 1872 y con los a√±os se convirti√≥ en un lugar tradicional de la ciudad. Al recorrerlo, puedes encontrar restaurantes, puestos de productos frescos y platos t√≠picos chilenos. Es un buen lugar para conocer la gastronom√≠a local y disfrutar de una parte de la cultura de Santiago.",
     "foto": "lugares/Mercado_Central.jpeg",
     "latitud": -33.4316,
     "longitud": -70.6502
@@ -47,8 +47,8 @@
   "model": "lugares.lugar",
   "pk": 5,
   "fields": {
-    "nombre": "Centro Cultural EstaciÛn Mapocho",
-    "descripcion": "La EstaciÛn Mapocho est· ubicada en el centro de Santiago, cerca del rÌo Mapocho y del Mercado Central. Antiguamente, funcionaba como una estaciÛn de trenes y fue inaugurada en 1912. Su edificio destaca por su gran estructura, sus detalles arquitectÛnicos y su estilo antiguo. En 1987 dejÛ de funcionar como estaciÛn ferroviaria y, m·s adelante, se transformÛ en un centro cultural donde se realizan exposiciones, ferias y eventos. Hoy es un lugar lleno de historia, ideal para conocer m·s sobre el pasado de Santiago y disfrutar de actividades culturales.",
+    "nombre": "Centro Cultural Estaci√≥n Mapocho",
+    "descripcion": "La Estaci√≥n Mapocho est√° ubicada en el centro de Santiago, cerca del r√≠o Mapocho y del Mercado Central. Antiguamente, funcionaba como una estaci√≥n de trenes y fue inaugurada en 1912. Su edificio destaca por su gran estructura, sus detalles arquitect√≥nicos y su estilo antiguo. En 1987 dej√≥ de funcionar como estaci√≥n ferroviaria y, m√°s adelante, se transform√≥ en un centro cultural donde se realizan exposiciones, ferias y eventos. Hoy es un lugar lleno de historia, ideal para conocer m√°s sobre el pasado de Santiago y disfrutar de actividades culturales.",
     "foto": "lugares/Estacion_Mapocho.jpeg",
     "latitud": -33.4322,
     "longitud": -70.6547
@@ -59,7 +59,7 @@
   "pk": 6,
   "fields": {
     "nombre": "Palacio de La Moneda",
-    "descripcion": "El Palacio de La Moneda est· ubicado en el centro de Santiago y es uno de los edificios m·s importantes de Chile, ya que es la sede del Gobierno. Fue construido originalmente para fabricar monedas y se inaugurÛ en 1805. Su arquitectura es de estilo neocl·sico y destaca por su fachada blanca y elegante. En 1846 comenzÛ a utilizarse como sede presidencial. Adem·s, fue escenario de importantes acontecimientos histÛricos, como el golpe de Estado de 1973. Hoy es un lugar muy visitado por turistas y personas interesadas en conocer la historia de Chile.",
+    "descripcion": "El Palacio de La Moneda est√° ubicado en el centro de Santiago y es uno de los edificios m√°s importantes de Chile, ya que es la sede del Gobierno. Fue construido originalmente para fabricar monedas y se inaugur√≥ en 1805. Su arquitectura es de estilo neocl√°sico y destaca por su fachada blanca y elegante. En 1846 comenz√≥ a utilizarse como sede presidencial. Adem√°s, fue escenario de importantes acontecimientos hist√≥ricos, como el golpe de Estado de 1973. Hoy es un lugar muy visitado por turistas y personas interesadas en conocer la historia de Chile.",
     "foto": "lugares/PalacioMoneda.jpeg",
     "latitud": -33.4429,
     "longitud": -70.6539
@@ -70,7 +70,7 @@
   "pk": 7,
   "fields": {
     "nombre": "Teatro Municipal de Santiago",
-    "descripcion": "El Teatro Municipal de Santiago est· ubicado en pleno centro de la ciudad y es uno de los lugares culturales m·s importantes de Chile. Fue inaugurado en 1857 y destaca por su hermosa arquitectura de estilo neocl·sico y sus elegantes salones. En su interior se realizan espect·culos de Ûpera, ballet, conciertos y otras presentaciones artÌsticas. A lo largo de los aÒos ha sido parte importante de la cultura chilena y ha recibido a grandes artistas. Es un lugar muy bonito que vale la pena conocer, especialmente si te gusta el arte y la m˙sica.",
+    "descripcion": "El Teatro Municipal de Santiago est√° ubicado en pleno centro de la ciudad y es uno de los lugares culturales m√°s importantes de Chile. Fue inaugurado en 1857 y destaca por su hermosa arquitectura de estilo neocl√°sico y sus elegantes salones. En su interior se realizan espect√°culos de √≥pera, ballet, conciertos y otras presentaciones art√≠sticas. A lo largo de los a√±os ha sido parte importante de la cultura chilena y ha recibido a grandes artistas. Es un lugar muy bonito que vale la pena conocer, especialmente si te gusta el arte y la m√∫sica.",
     "foto": "lugares/Teatro.jpeg",
     "latitud": -33.4404,
     "longitud": -70.6475
@@ -81,7 +81,7 @@
   "pk": 8,
   "fields": {
     "nombre": "La Catedral Metropolitana de Santiago",
-    "descripcion": "La Catedral Metropolitana de Santiago est· ubicada en la Plaza de Armas, en pleno centro de la ciudad. Es uno de los edificios religiosos m·s importantes de Chile y destaca por su hermosa arquitectura, sus grandes columnas y sus detalles decorativos. Su construcciÛn actual comenzÛ en 1748 y fue terminada en 1800. En su interior se pueden encontrar pinturas, esculturas y altares muy bonitos. Adem·s, ha sido escenario de importantes celebraciones religiosas. Es un lugar lleno de historia que vale la pena visitar para conocer un poco m·s sobre el pasado de Santiago.",
+    "descripcion": "La Catedral Metropolitana de Santiago est√° ubicada en la Plaza de Armas, en pleno centro de la ciudad. Es uno de los edificios religiosos m√°s importantes de Chile y destaca por su hermosa arquitectura, sus grandes columnas y sus detalles decorativos. Su construcci√≥n actual comenz√≥ en 1748 y fue terminada en 1800. En su interior se pueden encontrar pinturas, esculturas y altares muy bonitos. Adem√°s, ha sido escenario de importantes celebraciones religiosas. Es un lugar lleno de historia que vale la pena visitar para conocer un poco m√°s sobre el pasado de Santiago.",
     "foto": "lugares/Captura_de_pantalla_2026-10-29_203401.png",
     "latitud": -33.4378,
     "longitud": -70.6511
@@ -91,8 +91,8 @@
   "model": "lugares.lugar",
   "pk": 9,
   "fields": {
-    "nombre": "Barrio ParÌs Londres",
-    "descripcion": "El Barrio ParÌs-Londres est· ubicado en el centro de Santiago y es conocido por sus calles pequeÒas, adoquinadas y sus hermosos edificios de estilo europeo. Es un lugar que llama mucho la atenciÛn por su arquitectura, que recuerda a las ciudades de ParÌs y Londres. Fue construido durante la dÈcada de 1920 y tiene un ambiente tranquilo y lleno de historia. Al caminar por sus calles se pueden encontrar cafÈs, hoteles y lugares antiguos muy bonitos. Es un rincÛn especial de Santiago, ideal para pasear, sacar fotos y disfrutar de su encanto.",
+    "nombre": "Barrio Par√≠s Londres",
+    "descripcion": "El Barrio Par√≠s-Londres est√° ubicado en el centro de Santiago y es conocido por sus calles peque√±as, adoquinadas y sus hermosos edificios de estilo europeo. Es un lugar que llama mucho la atenci√≥n por su arquitectura, que recuerda a las ciudades de Par√≠s y Londres. Fue construido durante la d√©cada de 1920 y tiene un ambiente tranquilo y lleno de historia. Al caminar por sus calles se pueden encontrar caf√©s, hoteles y lugares antiguos muy bonitos. Es un rinc√≥n especial de Santiago, ideal para pasear, sacar fotos y disfrutar de su encanto.",
     "foto": "lugares/Barrioparislondres_OrzcID7.jpg",
     "latitud": -33.4404,
     "longitud": -70.6475
