@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>El camino del chungo</title>
+</head>
+<body>
+    <h1>El camino del chungo</h1>
+
+    {% for lugar in lugares %}
+        <div>
+            <img src="{{ lugar.foto.url }}" width="200">
+            <h2><a href="{% url 'detalle' lugar.id %}">{{ lugar.nombre }}</a></h2>
+        </div>
+    {% endfor %}
+</body>
+</html>
