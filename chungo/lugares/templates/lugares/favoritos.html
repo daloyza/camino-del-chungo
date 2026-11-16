@@ -1,0 +1,54 @@
+{% extends "lugares/base.html" %}
+
+{% block titulo %}Mis favoritos · El camino del chungo{% endblock %}
+
+{% block estilos %}
+<style>
+    .favorito {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+    .favorito img,
+    .favorito .sin-foto {
+        width: 90px;
+        height: 90px;
+        flex-shrink: 0;
+        object-fit: cover;
+        border-radius: 10px;
+        font-size: 13px;
+        padding: 6px;
+    }
+    .favorito h2 {
+        font-size: 20px;
+        margin: 0 0 4px;
+    }
+    .favorito p {
+        margin: 0 0 8px;
+        color: var(--texto-suave);
+    }
+    .favorito .boton { margin: 0; }
+</style>
+{% endblock %}
+
+{% block contenido %}
+<h1>Mis favoritos</h1>
+
+{% for favorito in favoritos %}
+    <div class="tarjeta favorito">
+        {% if favorito.lugar.foto %}
+            <img src="{{ favorito.lugar.foto.url }}" alt="Foto de {{ favorito.lugar.nombre }}">
+        {% else %}
+            <div class="sin-foto">Sin foto</div>
+        {% endif %}
+        <div>
+            <h2>{{ favorito.lugar.nombre }}</h2>
+            <p>Guardado el {{ favorito.fecha|date:"d/m/Y" }}</p>
+            <a class="boton" href="{% url 'detalle' favorito.lugar.id %}">Ver lugar</a>
+        </div>
+    </div>
+{% empty %}
+    <p class="mensaje">Todavía no tienes favoritos. Abre un lugar y toca "☆ Guardar en favoritos".</p>
+    <a class="boton" href="{% url 'cerca' %}">Buscar lugares cerca de mí</a>
+{% endfor %}
+{% endblock %}

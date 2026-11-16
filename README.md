@@ -2,8 +2,13 @@
 
 App web hecha con Django. La persona camina y, si esta cerca de un lugar
 registrado, la app le avisa que puede desbloquearlo. Al entrar ve el lugar y
-puede leer la descripcion, escucharla o no leerla. Hay un ranking de la
-Region Metropolitana con quien ha desbloqueado mas lugares. No lleva mapa.
+puede leer la descripcion, escucharla o no leerla, y guardarlo en sus
+favoritos. No pide crear cuenta y no lleva mapa.
+
+Funcionalidades:
+- Corazon: aviso por cercania (50 m) y vista rapida de la historia del lugar.
+- Funcionalidad 2: reproductor multimodal (Leer o Escuchar, con pausa).
+- Funcionalidad 3: coleccion de favoritos guardada en la base de datos.
 
 ## Como encenderlo (Windows)
 
@@ -38,23 +43,55 @@ Datos de prueba:
 
 El radio de 50 metros se cambia en chungo/lugares/views.py (RADIO_METROS).
 
+## Avisos al estar cerca de un lugar
+
+1. En /cerca/ tocar "Activar avisos" y elegir "Permitir".
+2. Simular la ubicacion del Caso 1: aparece un aviso del sistema
+   "Estas cerca de Cerro Santa Lucia". Al tocarlo se abre el lugar.
+3. Si no se dan permisos, aparece un aviso azul dentro de la pagina.
+4. El aviso de un mismo lugar no se repite antes de 6 horas. Para volver a
+   probarlo: F12 > Application > Local Storage > borrar "chungo_avisados".
+
+Limitaciones:
+- Solo funciona con la pagina /cerca/ abierta (no avisa con el navegador cerrado).
+- En iPhone solo funciona si la web esta agregada a la pantalla de inicio.
+- El celular necesita HTTPS: con http://192.168.x.x no hay ubicacion ni avisos.
+  En el computador funciona porque 127.0.0.1 cuenta como seguro.
+
+## Favoritos (persistencia de datos)
+
+1. Abrir un lugar, por ejemplo http://127.0.0.1:8000/lugar/1/
+2. Tocar "Guardar en favoritos": el boton cambia a "Quitar de favoritos".
+3. Abrir http://127.0.0.1:8000/favoritos/ : aparece el lugar con su fecha.
+4. Evidencia en la base de datos: http://127.0.0.1:8000/admin/ > Favoritos.
+   Cada fila tiene el lugar, el codigo del visitante y la fecha.
+
+No hay cuentas: cada navegador recibe un codigo al azar que se guarda en la
+sesion (cookie de un ano). Otro navegador o una ventana de incognito tiene
+su propia lista. Si se borran las cookies, se pierde la lista.
+
+Modelo de datos: Lugar (1) --- (N) Favorito
+- Lugar: nombre, descripcion, foto, latitud, longitud
+- Favorito: visitante, lugar (llave foranea a Lugar), fecha
+  Un visitante no puede guardar dos veces el mismo lugar.
+
 ## URLs
-- /            lista de lugares (de prueba)
+- /            lista de lugares
 - /cerca/      lugares a 50 metros o menos de tu ubicacion
-- /lugar/<id>/ detalle del lugar: Leer, Escuchar y No leer
+- /lugar/<id>/ detalle del lugar: Leer, Escuchar, No leer y favoritos
+- /favoritos/  lugares guardados por este navegador
 - /api/lugares/ lugares en formato JSON
+- /sw.js       Service Worker de los avisos
 - /admin/      panel de administracion
 
 ## Que esta hecho
 - Modelo Lugar (nombre, descripcion, foto, latitud, longitud)
 - Panel de administracion para cargar lugares
-- Pagina con la lista de lugares (es solo de prueba)
+- Pagina con la lista de lugares
 - Detalle del lugar con foto y botones Leer, Escuchar (voz del navegador) y No leer
+- Recuadro de reemplazo cuando un lugar no tiene foto
 - Pagina "cerca de ti": pide la ubicacion, calcula la distancia a cada lugar
   (formula de Haversine) y muestra solo los que estan a 50 metros o menos
-
-## Que falta (en este orden)
-1. Registro e inicio de sesion de usuarios
-2. Guardar los lugares desbloqueados y armar el ranking
-3. Notificaciones del navegador al estar cerca de un lugar
-4. Revisar un lugar que quedo sin foto
+- Avisos del navegador al llegar a un lugar (con aviso dentro de la pagina
+  como respaldo)
+- Coleccion de favoritos guardada en la base de datos (modelo Favorito)

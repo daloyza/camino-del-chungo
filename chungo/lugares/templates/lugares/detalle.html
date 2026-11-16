@@ -16,9 +16,18 @@
     <button type="button" class="boton" id="boton-escuchar">Escuchar</button>
     <button type="button" class="boton secundario" id="boton-no-leer">No leer</button>
 
+    <form method="post" action="{% url 'cambiar_favorito' lugar.id %}">
+        {% csrf_token %}
+        {% if es_favorito %}
+            <button type="submit" class="boton secundario">★ Quitar de favoritos</button>
+        {% else %}
+            <button type="submit" class="boton secundario">☆ Guardar en favoritos</button>
+        {% endif %}
+    </form>
+
     <!-- Controles de la voz: aparecen al tocar "Escuchar" -->
     <div id="controles-voz" class="oculto">
-        <p id="estado-voz" class="mensaje">Leyendo en voz alta…</p>
+        <p id="estado-voz" class="mensaje">Leyendo en voz alta...</p>
         <div class="fila-botones">
             <button type="button" class="boton secundario" id="boton-pausar">Pausar</button>
             <button type="button" class="boton secundario" id="boton-reanudar" disabled>Reanudar</button>
@@ -50,14 +59,14 @@
     const botonReanudar = document.getElementById("boton-reanudar");
     const botonDetener = document.getElementById("boton-detener");
 
-    // ---------- Botón "Leer" ----------
+    // Botón Leer
     botonLeer.addEventListener("click", function () {
         // toggle devuelve true si el texto quedó oculto
         const quedoOculto = textoDescripcion.classList.toggle("oculto");
         botonLeer.textContent = quedoOculto ? "Leer" : "Ocultar texto";
     });
 
-    // ---------- Botón "No leer": vuelve a la pantalla anterior ----------
+    // Botón No leer: vuelve a la página anterior
     botonNoLeer.addEventListener("click", function () {
         detenerVoz();
         if (history.length > 1) {
@@ -67,7 +76,7 @@
         }
     });
 
-    // ---------- Botón "Escuchar" (voz del navegador) ----------
+    // Botón Escuchar (speechSynthesis)
     const hayVoz = "speechSynthesis" in window;
     let vozElegida = null;
 
@@ -118,7 +127,7 @@
         });
 
         controlesVoz.classList.remove("oculto");
-        estadoVoz.textContent = "Leyendo en voz alta…";
+        estadoVoz.textContent = "Leyendo en voz alta...";
         botonPausar.disabled = false;
         botonReanudar.disabled = true;
     }
@@ -138,7 +147,7 @@
 
     botonReanudar.addEventListener("click", function () {
         window.speechSynthesis.resume();
-        estadoVoz.textContent = "Leyendo en voz alta…";
+        estadoVoz.textContent = "Leyendo en voz alta...";
         botonPausar.disabled = false;
         botonReanudar.disabled = true;
     });
@@ -148,7 +157,7 @@
         controlesVoz.classList.add("oculto");
     });
 
-    // Si la persona sale de la página, se calla la voz
+    // Corta la voz al salir de la página
     window.addEventListener("pagehide", detenerVoz);
 </script>
 {% endblock %}

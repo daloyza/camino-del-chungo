@@ -32,6 +32,26 @@
         font-size: 14px;
         color: var(--texto-suave);
     }
+    .banner-aviso {
+        position: sticky;
+        top: 8px;
+        z-index: 10;
+        background: var(--principal);
+        color: var(--principal-texto);
+        border-radius: 14px;
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+    .banner-aviso strong {
+        display: block;
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+    .banner-aviso .boton {
+        background: var(--tarjeta);
+        color: var(--texto);
+    }
 </style>
 {% endblock %}
 
@@ -40,6 +60,15 @@
 <p>Camina por Santiago Centro. Cuando estés a {{ radio_metros }} metros o menos de un lugar histórico, aparecerá aquí para que lo desbloquees.</p>
 
 <button type="button" class="boton" id="boton-buscar">Buscar lugares cerca de mí</button>
+<button type="button" class="boton secundario" id="boton-avisos">Activar avisos</button>
+<p id="estado-avisos" class="detalle-gps"></p>
+
+<!-- Aviso dentro de la página: se usa cuando no hay permiso para notificaciones -->
+<div id="banner-aviso" class="banner-aviso oculto" role="alert">
+    <strong id="banner-texto"></strong>
+    <a id="banner-enlace" class="boton" href="#">Ver lugar</a>
+    <button type="button" class="boton secundario" id="banner-cerrar">Cerrar</button>
+</div>
 
 <div id="mensaje" class="mensaje oculto"></div>
 <div id="resultados"></div>
@@ -49,7 +78,7 @@
 {% block scripts %}
 <script>
     const URL_API = "{% url 'api_lugares' %}";
-    const PRECISION_MAXIMA = 100;  // metros: si el GPS es peor que esto, avisamos
+    const PRECISION_MAXIMA = 100;  // metros; sobre esto se avisa que el GPS es impreciso
 
     let RADIO_METROS = {{ radio_metros }};  // viene de views.py (RADIO_METROS)
     let lugares = [];
@@ -128,18 +157,27 @@
         cajaResultados.innerHTML = "";
         cercanos.forEach(lugar => cajaResultados.appendChild(tarjetaLugar(lugar)));
 
-        if (precision > PRECISION_MAXIMA) {
-            mostrarMensaje("Tu ubicación es imprecisa (unos " + Math.round(precision) +
-                " m de error). Sal a un lugar abierto o activa el GPS del celular para mejorarla.");
-        } else if (cercanos.length === 0 && conDistancia.length > 0) {
+        // Puede haber más de un aviso a la vez (por ejemplo: lejos y además GPS impreciso)
+        const avisos = [];
+        if (cercanos.length === 0 && conDistancia.length > 0) {
             const masCercano = conDistancia[0];
-            mostrarMensaje("No hay lugares históricos a menos de " + RADIO_METROS + " metros. El más cercano es " +
+            avisos.push("No hay lugares históricos a menos de " + RADIO_METROS + " metros. El más cercano es " +
                 masCercano.nombre + ", a " + Math.round(masCercano.distancia) + " metros. ¡Sigue caminando!");
         } else if (cercanos.length === 0) {
-            mostrarMensaje("Todavía no hay lugares cargados en la app.");
+            avisos.push("Todavía no hay lugares cargados en la app.");
+        }
+        if (precision > PRECISION_MAXIMA) {
+            avisos.push("Ojo: tu ubicación es imprecisa (unos " + Math.round(precision) +
+                " m de error). Sal a un lugar abierto o activa el GPS del celular para mejorarla.");
+        }
+
+        if (avisos.length > 0) {
+            mostrarMensaje(avisos.join("\n\n"));
         } else {
             ocultarMensaje();
         }
+
+        avisarLugaresNuevos(cercanos);
     }
 
     function errorUbicacion(error) {
@@ -161,7 +199,7 @@
             return;
         }
 
-        mostrarMensaje("Buscando tu ubicación…");
+        mostrarMensaje("Buscando tu ubicación...");
 
         try {
             const respuesta = await fetch(URL_API);
@@ -179,9 +217,122 @@
             maximumAge: 5000,
             timeout: 20000,
         });
-        botonBuscar.textContent = "Buscando lugares mientras caminas…";
+        botonBuscar.textContent = "Buscando lugares mientras caminas...";
     }
 
     botonBuscar.addEventListener("click", empezar);
+
+    // Avisos de cercanía
+    const URL_SW = "{% url 'service_worker' %}";
+    const HORAS_ENTRE_AVISOS = 6;  // no se repite el aviso de un mismo lugar antes de esto
+    const CLAVE_AVISADOS = "chungo_avisados";
+
+    const botonAvisos = document.getElementById("boton-avisos");
+    const estadoAvisos = document.getElementById("estado-avisos");
+    const banner = document.getElementById("banner-aviso");
+    const bannerTexto = document.getElementById("banner-texto");
+    const bannerEnlace = document.getElementById("banner-enlace");
+
+    const hayNotificaciones = "Notification" in window && "serviceWorker" in navigator;
+    let registroSW = null;
+
+    if (hayNotificaciones) {
+        navigator.serviceWorker.register(URL_SW)
+            .then(registro => { registroSW = registro; })
+            .catch(() => { registroSW = null; });
+    }
+
+    function permisoAvisos() {
+        return hayNotificaciones ? Notification.permission : "no-disponible";
+    }
+
+    function actualizarEstadoAvisos() {
+        const permiso = permisoAvisos();
+        if (permiso === "granted") {
+            estadoAvisos.textContent = "Avisos activados: te avisaremos al llegar a un lugar mientras esta página esté abierta.";
+            botonAvisos.classList.add("oculto");
+        } else if (permiso === "denied") {
+            estadoAvisos.textContent = "Los avisos del celular están bloqueados. Igual te avisaremos aquí dentro de la página.";
+        } else if (permiso === "no-disponible") {
+            estadoAvisos.textContent = "Este navegador no permite avisos. Te avisaremos aquí dentro de la página.";
+            botonAvisos.classList.add("oculto");
+        } else {
+            estadoAvisos.textContent = "";
+        }
+    }
+
+    // Lugares ya avisados, guardados en el navegador: { idLugar: fecha en milisegundos }
+    function leerAvisados() {
+        try {
+            return JSON.parse(localStorage.getItem(CLAVE_AVISADOS)) || {};
+        } catch (e) {
+            return {};
+        }
+    }
+
+    function guardarAvisados(avisados) {
+        try {
+            localStorage.setItem(CLAVE_AVISADOS, JSON.stringify(avisados));
+        } catch (e) {
+            // Si el navegador no deja guardar, solo se repetirá el aviso
+        }
+    }
+
+    function mostrarBanner(lugar) {
+        bannerTexto.textContent = "¡Estás cerca de " + lugar.nombre + "! Puedes desbloquearlo.";
+        bannerEnlace.href = lugar.url;
+        banner.classList.remove("oculto");
+        if ("vibrate" in navigator) navigator.vibrate(200);
+    }
+
+    async function avisar(lugar) {
+        if (permisoAvisos() === "granted" && registroSW) {
+            try {
+                // Chrome en Android no acepta "new Notification", por eso se usa el Service Worker
+                await registroSW.showNotification("¡Estás cerca de " + lugar.nombre + "!", {
+                    body: "Toca aquí para desbloquearlo y conocer su historia.",
+                    icon: lugar.foto || undefined,
+                    tag: "lugar-" + lugar.id,
+                    data: { url: lugar.url },
+                });
+                return;
+            } catch (e) {
+                // Si falla, se usa el aviso dentro de la página
+            }
+        }
+        mostrarBanner(lugar);
+    }
+
+    function avisarLugaresNuevos(cercanos) {
+        const avisados = leerAvisados();
+        const ahora = Date.now();
+        const espera = HORAS_ENTRE_AVISOS * 60 * 60 * 1000;
+
+        cercanos.forEach(function (lugar) {
+            const ultimoAviso = avisados[lugar.id] || 0;
+            if (ahora - ultimoAviso > espera) {
+                avisados[lugar.id] = ahora;
+                avisar(lugar);
+            }
+        });
+        guardarAvisados(avisados);
+    }
+
+    // El permiso se pide desde un clic, porque los navegadores lo exigen
+    botonAvisos.addEventListener("click", async function () {
+        if (!hayNotificaciones) {
+            actualizarEstadoAvisos();
+            return;
+        }
+        await Notification.requestPermission();
+        actualizarEstadoAvisos();
+        if (vigilancia === null) empezar();
+    });
+
+    document.getElementById("banner-cerrar").addEventListener("click", function () {
+        banner.classList.add("oculto");
+    });
+
+    actualizarEstadoAvisos();
 </script>
 {% endblock %}

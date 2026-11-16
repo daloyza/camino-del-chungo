@@ -150,6 +150,7 @@
             border-radius: 8px;
             padding: 12px;
             margin-bottom: 16px;
+            white-space: pre-line;
         }
 
         .oculto { display: none !important; }
@@ -161,6 +162,7 @@
         <a class="marca" href="{% url 'lista' %}">El camino del chungo</a>
         <nav>
             <a href="{% url 'cerca' %}">Cerca de ti</a>
+            <a href="{% url 'favoritos' %}">Mis favoritos</a>
             <a href="{% url 'lista' %}">Lugares</a>
         </nav>
     </header>
