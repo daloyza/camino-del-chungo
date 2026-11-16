@@ -8,5 +8,6 @@ urlpatterns = [
     path("favoritos/", views.mis_favoritos, name="favoritos"),
     path("cerca/", views.cerca_de_ti, name="cerca"),
     path("api/lugares/", views.api_lugares, name="api_lugares"),
+    path("idioma/<str:codigo>/", views.cambiar_idioma, name="idioma"),
     path("sw.js", views.service_worker, name="service_worker"),
 ]

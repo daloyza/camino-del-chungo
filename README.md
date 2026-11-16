@@ -71,9 +71,25 @@ sesion (cookie de un ano). Otro navegador o una ventana de incognito tiene
 su propia lista. Si se borran las cookies, se pierde la lista.
 
 Modelo de datos: Lugar (1) --- (N) Favorito
-- Lugar: nombre, descripcion, foto, latitud, longitud
+- Lugar: nombre, descripcion, foto, latitud, longitud y sus traducciones
 - Favorito: visitante, lugar (llave foranea a Lugar), fecha
   Un visitante no puede guardar dos veces el mismo lugar.
+
+## Idiomas (espanol, ingles y portugues)
+
+Arriba a la derecha estan los botones ES / EN / PT. El idioma elegido se
+guarda en la sesion y cambia los textos de la app, el nombre y la historia
+de cada lugar, los avisos y la voz de "Escuchar".
+
+- Textos de la app: chungo/lugares/idiomas.py
+- Nombre e historia traducidos: campos nombre_en, descripcion_en, nombre_pt
+  y descripcion_pt del modelo Lugar (se editan en /admin/). Si estan vacios
+  se muestra el texto en espanol.
+
+Despues de bajar este cambio hay que correr, dentro de la carpeta chungo:
+
+    python manage.py migrate
+    python manage.py loaddata datos_lugares.json
 
 ## URLs
 - /            lista de lugares
@@ -81,6 +97,7 @@ Modelo de datos: Lugar (1) --- (N) Favorito
 - /lugar/<id>/ detalle del lugar: Leer, Escuchar, No leer y favoritos
 - /favoritos/  lugares guardados por este navegador
 - /api/lugares/ lugares en formato JSON
+- /idioma/<es|en|pt>/ cambia el idioma
 - /sw.js       Service Worker de los avisos
 - /admin/      panel de administracion
 
@@ -95,3 +112,4 @@ Modelo de datos: Lugar (1) --- (N) Favorito
 - Avisos del navegador al llegar a un lugar (con aviso dentro de la pagina
   como respaldo)
 - Coleccion de favoritos guardada en la base de datos (modelo Favorito)
+- Traduccion al ingles y al portugues (selector ES / EN / PT)

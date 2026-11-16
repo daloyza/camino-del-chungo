@@ -1,18 +1,18 @@
 {% extends "lugares/base.html" %}
 
 {% block contenido %}
-<h1>Lugares del camino</h1>
+<h1>{{ t.lista_titulo }}</h1>
 
 {% for lugar in lugares %}
     <div class="tarjeta">
         {% if lugar.foto %}
-            <img class="foto" src="{{ lugar.foto.url }}" alt="Foto de {{ lugar.nombre }}">
+            <img class="foto" src="{{ lugar.foto.url }}" alt="{{ t.foto_de }} {{ lugar.nombre_mostrado }}">
         {% else %}
-            <div class="sin-foto">Este lugar todavía no tiene foto</div>
+            <div class="sin-foto">{{ t.sin_foto }}</div>
         {% endif %}
-        <h2><a href="{% url 'detalle' lugar.id %}">{{ lugar.nombre }}</a></h2>
+        <h2><a href="{% url 'detalle' lugar.id %}">{{ lugar.nombre_mostrado }}</a></h2>
     </div>
 {% empty %}
-    <p class="mensaje">Todavía no hay lugares cargados.</p>
+    <p class="mensaje">{{ t.sin_lugares }}</p>
 {% endfor %}
 {% endblock %}

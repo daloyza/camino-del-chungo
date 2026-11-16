@@ -1,6 +1,6 @@
 {% extends "lugares/base.html" %}
 
-{% block titulo %}Cerca de ti · El camino del chungo{% endblock %}
+{% block titulo %}{{ t.cerca_titulo }} · El camino del chungo{% endblock %}
 
 {% block estilos %}
 <style>
@@ -56,18 +56,18 @@
 {% endblock %}
 
 {% block contenido %}
-<h1>Cerca de ti</h1>
-<p>Camina por Santiago Centro. Cuando estés a {{ radio_metros }} metros o menos de un lugar histórico, aparecerá aquí para que lo desbloquees.</p>
+<h1>{{ t.cerca_titulo }}</h1>
+<p>{{ intro }}</p>
 
-<button type="button" class="boton" id="boton-buscar">Buscar lugares cerca de mí</button>
-<button type="button" class="boton secundario" id="boton-avisos">Activar avisos</button>
+<button type="button" class="boton" id="boton-buscar">{{ t.buscar }}</button>
+<button type="button" class="boton secundario" id="boton-avisos">{{ t.activar_avisos }}</button>
 <p id="estado-avisos" class="detalle-gps"></p>
 
 <!-- Aviso dentro de la página: se usa cuando no hay permiso para notificaciones -->
 <div id="banner-aviso" class="banner-aviso oculto" role="alert">
     <strong id="banner-texto"></strong>
-    <a id="banner-enlace" class="boton" href="#">Ver lugar</a>
-    <button type="button" class="boton secundario" id="banner-cerrar">Cerrar</button>
+    <a id="banner-enlace" class="boton" href="#">{{ t.ver_lugar }}</a>
+    <button type="button" class="boton secundario" id="banner-cerrar">{{ t.cerrar }}</button>
 </div>
 
 <div id="mensaje" class="mensaje oculto"></div>
@@ -116,12 +116,12 @@
         if (lugar.foto) {
             const img = document.createElement("img");
             img.src = lugar.foto;
-            img.alt = "Foto de " + lugar.nombre;
+            img.alt = T.foto_de + " " + lugar.nombre;
             tarjeta.appendChild(img);
         } else {
             const sinFoto = document.createElement("div");
             sinFoto.className = "sin-foto";
-            sinFoto.textContent = "Sin foto";
+            sinFoto.textContent = T.sin_foto_corto;
             tarjeta.appendChild(sinFoto);
         }
 
@@ -129,11 +129,11 @@
         const titulo = document.createElement("h2");
         titulo.textContent = lugar.nombre;
         const distancia = document.createElement("p");
-        distancia.textContent = "Estás a " + Math.round(lugar.distancia) + " metros";
+        distancia.textContent = formato(T.estas_a, { metros: Math.round(lugar.distancia) });
         const enlace = document.createElement("a");
         enlace.className = "boton";
         enlace.href = lugar.url;
-        enlace.textContent = "Desbloquear";
+        enlace.textContent = T.desbloquear;
 
         texto.append(titulo, distancia, enlace);
         tarjeta.appendChild(texto);
@@ -151,8 +151,9 @@
             .sort((a, b) => a.distancia - b.distancia);
         const cercanos = conDistancia.filter(lugar => lugar.distancia <= RADIO_METROS);
 
-        detalleGps.textContent = "Tu ubicación: " + lat.toFixed(5) + ", " + lon.toFixed(5) +
-            " (precisión de unos " + Math.round(precision) + " m)";
+        detalleGps.textContent = formato(T.tu_ubicacion, {
+            lat: lat.toFixed(5), lon: lon.toFixed(5), precision: Math.round(precision),
+        });
 
         cajaResultados.innerHTML = "";
         cercanos.forEach(lugar => cajaResultados.appendChild(tarjetaLugar(lugar)));
@@ -161,14 +162,14 @@
         const avisos = [];
         if (cercanos.length === 0 && conDistancia.length > 0) {
             const masCercano = conDistancia[0];
-            avisos.push("No hay lugares históricos a menos de " + RADIO_METROS + " metros. El más cercano es " +
-                masCercano.nombre + ", a " + Math.round(masCercano.distancia) + " metros. ¡Sigue caminando!");
+            avisos.push(formato(T.sin_cercanos, {
+                radio: RADIO_METROS, nombre: masCercano.nombre, metros: Math.round(masCercano.distancia),
+            }));
         } else if (cercanos.length === 0) {
-            avisos.push("Todavía no hay lugares cargados en la app.");
+            avisos.push(T.sin_lugares);
         }
         if (precision > PRECISION_MAXIMA) {
-            avisos.push("Ojo: tu ubicación es imprecisa (unos " + Math.round(precision) +
-                " m de error). Sal a un lugar abierto o activa el GPS del celular para mejorarla.");
+            avisos.push(formato(T.impreciso, { precision: Math.round(precision) }));
         }
 
         if (avisos.length > 0) {
@@ -182,24 +183,23 @@
 
     function errorUbicacion(error) {
         if (error.code === error.PERMISSION_DENIED) {
-            mostrarMensaje("No nos diste permiso para ver tu ubicación. Toca el candado de la barra de direcciones, " +
-                "elige \"Permitir ubicación\" y vuelve a tocar el botón.");
+            mostrarMensaje(T.error_permiso);
         } else if (error.code === error.POSITION_UNAVAILABLE) {
-            mostrarMensaje("No pudimos encontrar tu ubicación. Revisa que el GPS del celular esté encendido.");
+            mostrarMensaje(T.error_no_disponible);
         } else if (error.code === error.TIMEOUT) {
-            mostrarMensaje("El GPS está tardando mucho. Sal a un lugar abierto y vuelve a intentarlo.");
+            mostrarMensaje(T.error_tiempo);
         } else {
-            mostrarMensaje("Hubo un problema al obtener tu ubicación. Inténtalo de nuevo.");
+            mostrarMensaje(T.error_otro);
         }
     }
 
     async function empezar() {
         if (!("geolocation" in navigator)) {
-            mostrarMensaje("Tu navegador no puede entregar la ubicación (sin GPS). Prueba con Chrome en el celular.");
+            mostrarMensaje(T.sin_geolocalizacion);
             return;
         }
 
-        mostrarMensaje("Buscando tu ubicación...");
+        mostrarMensaje(T.buscando_ubicacion);
 
         try {
             const respuesta = await fetch(URL_API);
@@ -207,7 +207,7 @@
             lugares = datos.lugares;
             RADIO_METROS = datos.radio_metros;
         } catch (e) {
-            mostrarMensaje("No pudimos cargar los lugares. Revisa tu conexión a internet.");
+            mostrarMensaje(T.error_carga);
             return;
         }
 
@@ -217,7 +217,7 @@
             maximumAge: 5000,
             timeout: 20000,
         });
-        botonBuscar.textContent = "Buscando lugares mientras caminas...";
+        botonBuscar.textContent = T.buscando_mientras;
     }
 
     botonBuscar.addEventListener("click", empezar);
@@ -249,12 +249,12 @@
     function actualizarEstadoAvisos() {
         const permiso = permisoAvisos();
         if (permiso === "granted") {
-            estadoAvisos.textContent = "Avisos activados: te avisaremos al llegar a un lugar mientras esta página esté abierta.";
+            estadoAvisos.textContent = T.avisos_activados;
             botonAvisos.classList.add("oculto");
         } else if (permiso === "denied") {
-            estadoAvisos.textContent = "Los avisos del celular están bloqueados. Igual te avisaremos aquí dentro de la página.";
+            estadoAvisos.textContent = T.avisos_bloqueados;
         } else if (permiso === "no-disponible") {
-            estadoAvisos.textContent = "Este navegador no permite avisos. Te avisaremos aquí dentro de la página.";
+            estadoAvisos.textContent = T.avisos_no_disponibles;
             botonAvisos.classList.add("oculto");
         } else {
             estadoAvisos.textContent = "";
@@ -279,7 +279,7 @@
     }
 
     function mostrarBanner(lugar) {
-        bannerTexto.textContent = "¡Estás cerca de " + lugar.nombre + "! Puedes desbloquearlo.";
+        bannerTexto.textContent = formato(T.puedes_desbloquear, { nombre: lugar.nombre });
         bannerEnlace.href = lugar.url;
         banner.classList.remove("oculto");
         if ("vibrate" in navigator) navigator.vibrate(200);
@@ -289,8 +289,8 @@
         if (permisoAvisos() === "granted" && registroSW) {
             try {
                 // Chrome en Android no acepta "new Notification", por eso se usa el Service Worker
-                await registroSW.showNotification("¡Estás cerca de " + lugar.nombre + "!", {
-                    body: "Toca aquí para desbloquearlo y conocer su historia.",
+                await registroSW.showNotification(formato(T.estas_cerca, { nombre: lugar.nombre }), {
+                    body: T.aviso_cuerpo,
                     icon: lugar.foto || undefined,
                     tag: "lugar-" + lugar.id,
                     data: { url: lugar.url },

@@ -1,6 +1,6 @@
 {% extends "lugares/base.html" %}
 
-{% block titulo %}Mis favoritos · El camino del chungo{% endblock %}
+{% block titulo %}{{ t.favoritos_titulo }} · El camino del chungo{% endblock %}
 
 {% block estilos %}
 <style>
@@ -32,23 +32,23 @@
 {% endblock %}
 
 {% block contenido %}
-<h1>Mis favoritos</h1>
+<h1>{{ t.favoritos_titulo }}</h1>
 
 {% for favorito in favoritos %}
     <div class="tarjeta favorito">
         {% if favorito.lugar.foto %}
-            <img src="{{ favorito.lugar.foto.url }}" alt="Foto de {{ favorito.lugar.nombre }}">
+            <img src="{{ favorito.lugar.foto.url }}" alt="{{ t.foto_de }} {{ favorito.lugar.nombre_mostrado }}">
         {% else %}
-            <div class="sin-foto">Sin foto</div>
+            <div class="sin-foto">{{ t.sin_foto_corto }}</div>
         {% endif %}
         <div>
-            <h2>{{ favorito.lugar.nombre }}</h2>
-            <p>Guardado el {{ favorito.fecha|date:"d/m/Y" }}</p>
-            <a class="boton" href="{% url 'detalle' favorito.lugar.id %}">Ver lugar</a>
+            <h2>{{ favorito.lugar.nombre_mostrado }}</h2>
+            <p>{{ t.guardado_el }} {{ favorito.fecha|date:"d/m/Y" }}</p>
+            <a class="boton" href="{% url 'detalle' favorito.lugar.id %}">{{ t.ver_lugar }}</a>
         </div>
     </div>
 {% empty %}
-    <p class="mensaje">Todavía no tienes favoritos. Abre un lugar y toca "☆ Guardar en favoritos".</p>
-    <a class="boton" href="{% url 'cerca' %}">Buscar lugares cerca de mí</a>
+    <p class="mensaje">{{ t.sin_favoritos }}</p>
+    <a class="boton" href="{% url 'cerca' %}">{{ t.buscar }}</a>
 {% endfor %}
 {% endblock %}

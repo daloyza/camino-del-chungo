@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es-CL">
+<html lang="{{ idioma_html }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -153,6 +153,25 @@
             white-space: pre-line;
         }
 
+        /* Selector de idioma */
+        .idiomas {
+            display: flex;
+            gap: 4px;
+            width: 100%;
+            justify-content: flex-end;
+        }
+        .idiomas a {
+            color: var(--barra-texto);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+        .idiomas a.activo { border-color: var(--barra-texto); }
+        .idiomas a:hover { background: rgba(255, 255, 255, 0.15); }
+
         .oculto { display: none !important; }
     </style>
     {% block estilos %}{% endblock %}
@@ -161,9 +180,15 @@
     <header class="barra">
         <a class="marca" href="{% url 'lista' %}">El camino del chungo</a>
         <nav>
-            <a href="{% url 'cerca' %}">Cerca de ti</a>
-            <a href="{% url 'favoritos' %}">Mis favoritos</a>
-            <a href="{% url 'lista' %}">Lugares</a>
+            <a href="{% url 'cerca' %}">{{ t.nav_cerca }}</a>
+            <a href="{% url 'favoritos' %}">{{ t.nav_favoritos }}</a>
+            <a href="{% url 'lista' %}">{{ t.nav_lugares }}</a>
+        </nav>
+        <nav class="idiomas" aria-label="{{ t.elegir_idioma }}">
+            {% for codigo, etiqueta in idiomas %}
+                <a href="{% url 'idioma' codigo %}?next={{ request.get_full_path|urlencode }}"
+                   lang="{{ codigo }}"{% if codigo == idioma %} class="activo" aria-current="true"{% endif %}>{{ etiqueta }}</a>
+            {% endfor %}
         </nav>
     </header>
 
@@ -171,6 +196,16 @@
         {% block contenido %}{% endblock %}
     </main>
 
+    {# Textos del idioma elegido, para usarlos desde JavaScript #}
+    {{ t|json_script:"textos" }}
+    <script>
+        const T = JSON.parse(document.getElementById("textos").textContent);
+        const IDIOMA_VOZ = "{{ idioma_html }}";
+        // Reemplaza {clave} por su valor: formato(T.estas_a, {metros: 20})
+        function formato(texto, valores) {
+            return texto.replace(/\{(\w+)\}/g, (todo, clave) => (clave in valores ? valores[clave] : todo));
+        }
+    </script>
     {% block scripts %}{% endblock %}
 </body>
 </html>
