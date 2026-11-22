@@ -6,12 +6,15 @@
       "nombre": "Cerro Santa Lucía",
       "descripcion": "El Cerro Santa Lucía está en pleno centro de Santiago y es un lugar muy bonito para pasear y disfrutar de la naturaleza. Tiene jardines, escaleras, fuentes y miradores desde donde se puede ver la ciudad. Antiguamente, los pueblos originarios lo llamaban Huelén. En 1541, Pedro de Valdivia le puso el nombre de Santa Lucía y fundó Santiago a sus pies. Más adelante, Benjamín Vicuña Mackenna lo transformó en un paseo público. Hoy es un lugar ideal para caminar, sacar fotos y conocer un poco más de la historia de Santiago.",
       "foto": "lugares/cerrosanta.jpeg",
-      "latitud": -33.440259,
-      "longitud": -70.653633,
+      "latitud": -33.439327,
+      "longitud": -70.643381,
       "nombre_en": "Santa Lucía Hill",
       "descripcion_en": "Santa Lucía Hill is right in the heart of downtown Santiago and is a lovely place to take a walk and enjoy nature. It has gardens, stairways, fountains and viewpoints where you can see the city. Long ago, the Indigenous peoples called it Huelén. In 1541, Pedro de Valdivia named it Santa Lucía and founded Santiago at its foot. Later, Benjamín Vicuña Mackenna turned it into a public promenade. Today it is an ideal place to walk, take photos and learn a little more about the history of Santiago.",
       "nombre_pt": "Morro Santa Lúcia",
-      "descripcion_pt": "O Morro Santa Lúcia fica bem no centro de Santiago e é um lugar muito bonito para passear e aproveitar a natureza. Tem jardins, escadarias, fontes e mirantes de onde se pode ver a cidade. Antigamente, os povos originários o chamavam de Huelén. Em 1541, Pedro de Valdivia lhe deu o nome de Santa Lúcia e fundou Santiago aos seus pés. Mais tarde, Benjamín Vicuña Mackenna o transformou em um passeio público. Hoje é um lugar ideal para caminhar, tirar fotos e conhecer um pouco mais da história de Santiago."
+      "descripcion_pt": "O Morro Santa Lúcia fica bem no centro de Santiago e é um lugar muito bonito para passear e aproveitar a natureza. Tem jardins, escadarias, fontes e mirantes de onde se pode ver a cidade. Antigamente, os povos originários o chamavam de Huelén. Em 1541, Pedro de Valdivia lhe deu o nome de Santa Lúcia e fundou Santiago aos seus pés. Mais tarde, Benjamín Vicuña Mackenna o transformou em um passeio público. Hoje é um lugar ideal para caminhar, tirar fotos e conhecer um pouco mais da história de Santiago.",
+      "codigo_ide": "00372_MH_13101",
+      "categoria": "Monumento Histórico",
+      "desde_ide": false
     }
   },
   {
@@ -21,12 +24,15 @@
       "nombre": "Barrio Lastarrias",
       "descripcion": "El barrio Lastarria está ubicado en el centro de Santiago y es conocido por sus calles bonitas, sus cafés, restaurantes y tiendas de artesanía. Es un lugar con mucho encanto, donde se mezclan edificios antiguos con espacios culturales y modernos. Su historia se remonta al siglo XIX y, con el tiempo, se convirtió en un punto de encuentro para artistas, turistas y vecinos. Hoy es ideal para caminar, comer algo rico, visitar museos y disfrutar de su ambiente tranquilo y entretenido.\r\n\r\nTiene un ambiente bohemio y cultural, con música, ferias y artistas que le dan vida a sus calles. Además, su historia comenzó a tomar forma en el siglo XIX, especialmente con la construcción de la Iglesia de la Veracruz en 1857. Es un barrio ideal para conocer una parte más artística y entretenida de Santiago.",
       "foto": "lugares/barriolastarrias.jpeg",
-      "latitud": -33.437965,
-      "longitud": -70.641014,
+      "latitud": -33.438161,
+      "longitud": -70.641714,
       "nombre_en": "Lastarria Neighborhood",
       "descripcion_en": "The Lastarria neighborhood is located in downtown Santiago and is known for its charming streets, cafés, restaurants and craft shops. It is a place full of charm, where old buildings blend with cultural and modern spaces. Its history goes back to the 19th century and, over time, it became a meeting point for artists, tourists and neighbors. Today it is ideal for walking, having something tasty to eat, visiting museums and enjoying its calm and lively atmosphere.\r\n\r\nIt has a bohemian and cultural vibe, with music, fairs and artists that bring its streets to life. Its history began to take shape in the 19th century, especially with the construction of the Church of the Veracruz in 1857. It is an ideal neighborhood to discover a more artistic and fun side of Santiago.",
       "nombre_pt": "Bairro Lastarria",
-      "descripcion_pt": "O bairro Lastarria fica no centro de Santiago e é conhecido por suas ruas bonitas, cafés, restaurantes e lojas de artesanato. É um lugar cheio de charme, onde prédios antigos se misturam com espaços culturais e modernos. Sua história remonta ao século XIX e, com o tempo, tornou-se um ponto de encontro para artistas, turistas e moradores. Hoje é ideal para caminhar, comer algo gostoso, visitar museus e aproveitar seu ambiente tranquilo e animado.\r\n\r\nTem um ambiente boêmio e cultural, com música, feiras e artistas que dão vida às suas ruas. Sua história começou a tomar forma no século XIX, especialmente com a construção da Igreja da Veracruz em 1857. É um bairro ideal para conhecer um lado mais artístico e divertido de Santiago."
+      "descripcion_pt": "O bairro Lastarria fica no centro de Santiago e é conhecido por suas ruas bonitas, cafés, restaurantes e lojas de artesanato. É um lugar cheio de charme, onde prédios antigos se misturam com espaços culturais e modernos. Sua história remonta ao século XIX e, com o tempo, tornou-se um ponto de encontro para artistas, turistas e moradores. Hoje é ideal para caminhar, comer algo gostoso, visitar museus e aproveitar seu ambiente tranquilo e animado.\r\n\r\nTem um ambiente boêmio e cultural, com música, feiras e artistas que dão vida às suas ruas. Sua história começou a tomar forma no século XIX, especialmente com a construção da Igreja da Veracruz em 1857. É um bairro ideal para conhecer um lado mais artístico e divertido de Santiago.",
+      "codigo_ide": "00653_ZT_13101",
+      "categoria": "Zona Típica o Pintoresca",
+      "desde_ide": false
     }
   },
   {
@@ -36,12 +42,15 @@
       "nombre": "Museo de bellas artes",
       "descripcion": "El Museo Nacional de Bellas Artes está ubicado en el Parque Forestal, en Santiago. Es un lugar muy bonito, conocido por su gran edificio, su cúpula de vidrio y sus exposiciones de arte. Fue fundado en 1880 y su edificio actual se inauguró en 1910, diseñado por el arquitecto Emilio Jéquier. En su interior se pueden encontrar pinturas, esculturas y obras de artistas chilenos y extranjeros. Es un espacio ideal para disfrutar del arte, aprender sobre la cultura y pasear por sus alrededores.",
       "foto": "lugares/bellas_artes.jpeg",
-      "latitud": -33.4353,
-      "longitud": -70.6436,
+      "latitud": -33.435319,
+      "longitud": -70.643609,
       "nombre_en": "National Museum of Fine Arts",
       "descripcion_en": "The National Museum of Fine Arts is located in Parque Forestal, in Santiago. It is a beautiful place, known for its large building, its glass dome and its art exhibitions. It was founded in 1880 and its current building, designed by the architect Emilio Jéquier, opened in 1910. Inside you can find paintings, sculptures and works by Chilean and foreign artists. It is an ideal space to enjoy art, learn about culture and stroll around the area.",
       "nombre_pt": "Museu Nacional de Belas Artes",
-      "descripcion_pt": "O Museu Nacional de Belas Artes fica no Parque Forestal, em Santiago. É um lugar muito bonito, conhecido por seu grande edifício, sua cúpula de vidro e suas exposições de arte. Foi fundado em 1880 e seu edifício atual, projetado pelo arquiteto Emilio Jéquier, foi inaugurado em 1910. Em seu interior é possível encontrar pinturas, esculturas e obras de artistas chilenos e estrangeiros. É um espaço ideal para apreciar a arte, aprender sobre a cultura e passear pelos arredores."
+      "descripcion_pt": "O Museu Nacional de Belas Artes fica no Parque Forestal, em Santiago. É um lugar muito bonito, conhecido por seu grande edifício, sua cúpula de vidro e suas exposições de arte. Foi fundado em 1880 e seu edifício atual, projetado pelo arquiteto Emilio Jéquier, foi inaugurado em 1910. Em seu interior é possível encontrar pinturas, esculturas e obras de artistas chilenos e estrangeiros. É um espaço ideal para apreciar a arte, aprender sobre a cultura e passear pelos arredores.",
+      "codigo_ide": "00187_MH_13101",
+      "categoria": "Monumento Histórico",
+      "desde_ide": false
     }
   },
   {
@@ -51,12 +60,15 @@
       "nombre": "Mercado Central de Santiago",
       "descripcion": "El Mercado Central de Santiago es un lugar muy conocido por su ambiente animado y su rica comida, especialmente los pescados y mariscos. Está ubicado cerca del río Mapocho y destaca por su estructura de hierro y su estilo antiguo. Fue inaugurado en 1872 y con los años se convirtió en un lugar tradicional de la ciudad. Al recorrerlo, puedes encontrar restaurantes, puestos de productos frescos y platos típicos chilenos. Es un buen lugar para conocer la gastronomía local y disfrutar de una parte de la cultura de Santiago.",
       "foto": "lugares/Mercado_Central.jpeg",
-      "latitud": -33.4316,
-      "longitud": -70.6502,
+      "latitud": -33.433783,
+      "longitud": -70.651042,
       "nombre_en": "Santiago Central Market",
       "descripcion_en": "The Santiago Central Market is well known for its lively atmosphere and its delicious food, especially fish and seafood. It is located near the Mapocho River and stands out for its iron structure and old-fashioned style. It opened in 1872 and over the years became a traditional place in the city. As you walk through it, you can find restaurants, stalls with fresh products and typical Chilean dishes. It is a great place to discover local food and enjoy a part of Santiago's culture.",
       "nombre_pt": "Mercado Central de Santiago",
-      "descripcion_pt": "O Mercado Central de Santiago é muito conhecido por seu ambiente animado e sua comida deliciosa, especialmente os peixes e frutos do mar. Fica perto do rio Mapocho e se destaca por sua estrutura de ferro e seu estilo antigo. Foi inaugurado em 1872 e, com os anos, tornou-se um lugar tradicional da cidade. Ao percorrê-lo, você encontra restaurantes, bancas de produtos frescos e pratos típicos chilenos. É um ótimo lugar para conhecer a gastronomia local e aproveitar uma parte da cultura de Santiago."
+      "descripcion_pt": "O Mercado Central de Santiago é muito conhecido por seu ambiente animado e sua comida deliciosa, especialmente os peixes e frutos do mar. Fica perto do rio Mapocho e se destaca por sua estrutura de ferro e seu estilo antigo. Foi inaugurado em 1872 e, com os anos, tornou-se um lugar tradicional da cidade. Ao percorrê-lo, você encontra restaurantes, bancas de produtos frescos e pratos típicos chilenos. É um ótimo lugar para conhecer a gastronomia local e aproveitar uma parte da cultura de Santiago.",
+      "codigo_ide": "00376_MH_13101",
+      "categoria": "Monumento Histórico",
+      "desde_ide": false
     }
   },
   {
@@ -66,12 +78,15 @@
       "nombre": "Centro Cultural Estación Mapocho",
       "descripcion": "La Estación Mapocho está ubicada en el centro de Santiago, cerca del río Mapocho y del Mercado Central. Antiguamente, funcionaba como una estación de trenes y fue inaugurada en 1912. Su edificio destaca por su gran estructura, sus detalles arquitectónicos y su estilo antiguo. En 1987 dejó de funcionar como estación ferroviaria y, más adelante, se transformó en un centro cultural donde se realizan exposiciones, ferias y eventos. Hoy es un lugar lleno de historia, ideal para conocer más sobre el pasado de Santiago y disfrutar de actividades culturales.",
       "foto": "lugares/Estacion_Mapocho.jpeg",
-      "latitud": -33.4322,
-      "longitud": -70.6547,
+      "latitud": -33.432225,
+      "longitud": -70.654507,
       "nombre_en": "Estación Mapocho Cultural Center",
       "descripcion_en": "Mapocho Station is located in downtown Santiago, near the Mapocho River and the Central Market. It used to be a train station and opened in 1912. Its building stands out for its large structure, its architectural details and its old-fashioned style. In 1987 it stopped working as a railway station and later became a cultural center that hosts exhibitions, fairs and events. Today it is a place full of history, ideal for learning more about Santiago's past and enjoying cultural activities.",
       "nombre_pt": "Centro Cultural Estação Mapocho",
-      "descripcion_pt": "A Estação Mapocho fica no centro de Santiago, perto do rio Mapocho e do Mercado Central. Antigamente funcionava como estação de trem e foi inaugurada em 1912. Seu edifício se destaca pela grande estrutura, pelos detalhes arquitetônicos e pelo estilo antigo. Em 1987 deixou de funcionar como estação ferroviária e, mais tarde, foi transformada em um centro cultural onde acontecem exposições, feiras e eventos. Hoje é um lugar cheio de história, ideal para conhecer mais sobre o passado de Santiago e aproveitar atividades culturais."
+      "descripcion_pt": "A Estação Mapocho fica no centro de Santiago, perto do rio Mapocho e do Mercado Central. Antigamente funcionava como estação de trem e foi inaugurada em 1912. Seu edifício se destaca pela grande estrutura, pelos detalhes arquitetônicos e pelo estilo antigo. Em 1987 deixou de funcionar como estação ferroviária e, mais tarde, foi transformada em um centro cultural onde acontecem exposições, feiras e eventos. Hoje é um lugar cheio de história, ideal para conhecer mais sobre o passado de Santiago e aproveitar atividades culturais.",
+      "codigo_ide": "00188_MH_13101",
+      "categoria": "Monumento Histórico",
+      "desde_ide": false
     }
   },
   {
@@ -81,12 +96,15 @@
       "nombre": "Palacio de La Moneda",
       "descripcion": "El Palacio de La Moneda está ubicado en el centro de Santiago y es uno de los edificios más importantes de Chile, ya que es la sede del Gobierno. Fue construido originalmente para fabricar monedas y se inauguró en 1805. Su arquitectura es de estilo neoclásico y destaca por su fachada blanca y elegante. En 1846 comenzó a utilizarse como sede presidencial. Además, fue escenario de importantes acontecimientos históricos, como el golpe de Estado de 1973. Hoy es un lugar muy visitado por turistas y personas interesadas en conocer la historia de Chile.",
       "foto": "lugares/PalacioMoneda.jpeg",
-      "latitud": -33.4429,
-      "longitud": -70.6539,
+      "latitud": -33.442809,
+      "longitud": -70.653875,
       "nombre_en": "La Moneda Palace",
       "descripcion_en": "La Moneda Palace is located in downtown Santiago and is one of the most important buildings in Chile, since it is the seat of the Government. It was originally built to mint coins and opened in 1805. Its architecture is neoclassical and stands out for its white, elegant façade. In 1846 it began to be used as the presidential seat. It was also the setting of important historical events, such as the 1973 coup d'état. Today it is visited by many tourists and people interested in learning about the history of Chile.",
       "nombre_pt": "Palácio de La Moneda",
-      "descripcion_pt": "O Palácio de La Moneda fica no centro de Santiago e é um dos edifícios mais importantes do Chile, pois é a sede do Governo. Foi construído originalmente para fabricar moedas e inaugurado em 1805. Sua arquitetura é de estilo neoclássico e se destaca pela fachada branca e elegante. Em 1846 começou a ser usado como sede presidencial. Além disso, foi cenário de importantes acontecimentos históricos, como o golpe de Estado de 1973. Hoje é um lugar muito visitado por turistas e pessoas interessadas em conhecer a história do Chile."
+      "descripcion_pt": "O Palácio de La Moneda fica no centro de Santiago e é um dos edifícios mais importantes do Chile, pois é a sede do Governo. Foi construído originalmente para fabricar moedas e inaugurado em 1805. Sua arquitetura é de estilo neoclássico e se destaca pela fachada branca e elegante. Em 1846 começou a ser usado como sede presidencial. Além disso, foi cenário de importantes acontecimentos históricos, como o golpe de Estado de 1973. Hoje é um lugar muito visitado por turistas e pessoas interessadas em conhecer a história do Chile.",
+      "codigo_ide": "00027_MH_13101",
+      "categoria": "Monumento Histórico",
+      "desde_ide": false
     }
   },
   {
@@ -96,12 +114,15 @@
       "nombre": "Teatro Municipal de Santiago",
       "descripcion": "El Teatro Municipal de Santiago está ubicado en pleno centro de la ciudad y es uno de los lugares culturales más importantes de Chile. Fue inaugurado en 1857 y destaca por su hermosa arquitectura de estilo neoclásico y sus elegantes salones. En su interior se realizan espectáculos de ópera, ballet, conciertos y otras presentaciones artísticas. A lo largo de los años ha sido parte importante de la cultura chilena y ha recibido a grandes artistas. Es un lugar muy bonito que vale la pena conocer, especialmente si te gusta el arte y la música.",
       "foto": "lugares/Teatro.jpeg",
-      "latitud": -33.4404,
-      "longitud": -70.6475,
+      "latitud": -33.441131,
+      "longitud": -70.647505,
       "nombre_en": "Municipal Theater of Santiago",
       "descripcion_en": "The Municipal Theater of Santiago is located right in the city center and is one of the most important cultural venues in Chile. It opened in 1857 and stands out for its beautiful neoclassical architecture and its elegant halls. Opera, ballet, concerts and other artistic performances take place inside. Over the years it has been an important part of Chilean culture and has welcomed great artists. It is a beautiful place worth visiting, especially if you like art and music.",
       "nombre_pt": "Teatro Municipal de Santiago",
-      "descripcion_pt": "O Teatro Municipal de Santiago fica bem no centro da cidade e é um dos lugares culturais mais importantes do Chile. Foi inaugurado em 1857 e se destaca por sua bela arquitetura de estilo neoclássico e seus salões elegantes. Em seu interior acontecem espetáculos de ópera, balé, concertos e outras apresentações artísticas. Ao longo dos anos, tem sido parte importante da cultura chilena e recebeu grandes artistas. É um lugar muito bonito que vale a pena conhecer, especialmente se você gosta de arte e música."
+      "descripcion_pt": "O Teatro Municipal de Santiago fica bem no centro da cidade e é um dos lugares culturais mais importantes do Chile. Foi inaugurado em 1857 e se destaca por sua bela arquitetura de estilo neoclássico e seus salões elegantes. Em seu interior acontecem espetáculos de ópera, balé, concertos e outras apresentações artísticas. Ao longo dos anos, tem sido parte importante da cultura chilena e recebeu grandes artistas. É um lugar muito bonito que vale a pena conhecer, especialmente se você gosta de arte e música.",
+      "codigo_ide": "00143_MH_13101",
+      "categoria": "Monumento Histórico",
+      "desde_ide": false
     }
   },
   {
@@ -111,12 +132,15 @@
       "nombre": "La Catedral Metropolitana de Santiago",
       "descripcion": "La Catedral Metropolitana de Santiago está ubicada en la Plaza de Armas, en pleno centro de la ciudad. Es uno de los edificios religiosos más importantes de Chile y destaca por su hermosa arquitectura, sus grandes columnas y sus detalles decorativos. Su construcción actual comenzó en 1748 y fue terminada en 1800. En su interior se pueden encontrar pinturas, esculturas y altares muy bonitos. Además, ha sido escenario de importantes celebraciones religiosas. Es un lugar lleno de historia que vale la pena visitar para conocer un poco más sobre el pasado de Santiago.",
       "foto": "lugares/Captura_de_pantalla_2026-10-29_203401.png",
-      "latitud": -33.4378,
-      "longitud": -70.6511,
+      "latitud": -33.437724,
+      "longitud": -70.651927,
       "nombre_en": "Metropolitan Cathedral of Santiago",
       "descripcion_en": "The Metropolitan Cathedral of Santiago is located on the Plaza de Armas, right in the city center. It is one of the most important religious buildings in Chile and stands out for its beautiful architecture, its large columns and its decorative details. Construction of the current building began in 1748 and was finished in 1800. Inside you can find beautiful paintings, sculptures and altars. It has also been the setting of important religious celebrations. It is a place full of history worth visiting to learn a little more about Santiago's past.",
       "nombre_pt": "Catedral Metropolitana de Santiago",
-      "descripcion_pt": "A Catedral Metropolitana de Santiago fica na Plaza de Armas, bem no centro da cidade. É um dos edifícios religiosos mais importantes do Chile e se destaca por sua bela arquitetura, suas grandes colunas e seus detalhes decorativos. Sua construção atual começou em 1748 e foi concluída em 1800. Em seu interior há pinturas, esculturas e altares muito bonitos. Além disso, foi cenário de importantes celebrações religiosas. É um lugar cheio de história que vale a pena visitar para conhecer um pouco mais sobre o passado de Santiago."
+      "descripcion_pt": "A Catedral Metropolitana de Santiago fica na Plaza de Armas, bem no centro da cidade. É um dos edifícios religiosos mais importantes do Chile e se destaca por sua bela arquitetura, suas grandes colunas e seus detalhes decorativos. Sua construção atual começou em 1748 e foi concluída em 1800. Em seu interior há pinturas, esculturas e altares muito bonitos. Além disso, foi cenário de importantes celebrações religiosas. É um lugar cheio de história que vale a pena visitar para conhecer um pouco mais sobre o passado de Santiago.",
+      "codigo_ide": "00028_MH_13101",
+      "categoria": "Monumento Histórico",
+      "desde_ide": false
     }
   },
   {
@@ -126,12 +150,15 @@
       "nombre": "Barrio París Londres",
       "descripcion": "El Barrio París-Londres está ubicado en el centro de Santiago y es conocido por sus calles pequeñas, adoquinadas y sus hermosos edificios de estilo europeo. Es un lugar que llama mucho la atención por su arquitectura, que recuerda a las ciudades de París y Londres. Fue construido durante la década de 1920 y tiene un ambiente tranquilo y lleno de historia. Al caminar por sus calles se pueden encontrar cafés, hoteles y lugares antiguos muy bonitos. Es un rincón especial de Santiago, ideal para pasear, sacar fotos y disfrutar de su encanto.",
       "foto": "lugares/Barrioparislondres_OrzcID7.jpg",
-      "latitud": -33.4404,
-      "longitud": -70.6475,
+      "latitud": -33.444376,
+      "longitud": -70.648062,
       "nombre_en": "París-Londres Neighborhood",
       "descripcion_en": "The París-Londres neighborhood is located in downtown Santiago and is known for its small cobblestone streets and its beautiful European-style buildings. It draws a lot of attention for its architecture, which is reminiscent of the cities of Paris and London. It was built during the 1920s and has a calm atmosphere full of history. Walking through its streets you can find cafés, hotels and lovely old places. It is a special corner of Santiago, ideal for strolling, taking photos and enjoying its charm.",
       "nombre_pt": "Bairro París-Londres",
-      "descripcion_pt": "O Bairro París-Londres fica no centro de Santiago e é conhecido por suas ruas pequenas de paralelepípedos e seus belos edifícios de estilo europeu. É um lugar que chama muita atenção por sua arquitetura, que lembra as cidades de Paris e Londres. Foi construído durante a década de 1920 e tem um ambiente tranquilo e cheio de história. Ao caminhar por suas ruas, é possível encontrar cafés, hotéis e lugares antigos muito bonitos. É um cantinho especial de Santiago, ideal para passear, tirar fotos e aproveitar seu charme."
+      "descripcion_pt": "O Bairro París-Londres fica no centro de Santiago e é conhecido por suas ruas pequenas de paralelepípedos e seus belos edifícios de estilo europeu. É um lugar que chama muita atenção por sua arquitetura, que lembra as cidades de Paris e Londres. Foi construído durante a década de 1920 e tem um ambiente tranquilo e cheio de história. Ao caminhar por suas ruas, é possível encontrar cafés, hotéis e lugares antigos muito bonitos. É um cantinho especial de Santiago, ideal para passear, tirar fotos e aproveitar seu charme.",
+      "codigo_ide": "00312_ZT_13101",
+      "categoria": "Zona Típica o Pintoresca",
+      "desde_ide": false
     }
   }
 ]

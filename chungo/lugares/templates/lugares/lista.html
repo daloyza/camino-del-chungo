@@ -59,7 +59,7 @@
 {% for lugar in lugares %}
     <a class="lugar" href="{% url 'detalle' lugar.id %}">
         {% if lugar.foto %}
-            <img class="foto" src="{{ lugar.foto.url }}" alt="{{ t.foto_de }} {{ lugar.nombre_mostrado }}">
+            <img class="foto" loading="lazy" src="{{ lugar.foto.url }}" alt="{{ t.foto_de }} {{ lugar.nombre_mostrado }}">
         {% else %}
             <div class="sin-foto">{{ t.sin_foto }}</div>
         {% endif %}

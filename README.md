@@ -22,6 +22,7 @@ Funcionalidades:
      cd chungo
      python manage.py migrate
      python manage.py loaddata datos_lugares.json
+     python manage.py importar_patrimonio
      python manage.py createsuperuser
 5. Encender el servidor:
      python manage.py runserver
@@ -35,11 +36,11 @@ Funcionalidades:
 3. Tocar "Buscar lugares cerca de mi" y permitir la ubicacion.
 
 Datos de prueba:
-- Caso 1 (cerca): latitud -33.440259, longitud -70.653633 (Cerro Santa Lucia).
+- Caso 1 (cerca): latitud -33.439327, longitud -70.643381 (Cerro Santa Lucia).
   Debe aparecer "Cerro Santa Lucia" a 0 metros con el boton "Desbloquear".
-- Caso 2 (lejos): latitud -33.4450, longitud -70.6600.
+- Caso 2 (lejos): latitud -33.4347, longitud -70.6560.
   Debe decir que no hay lugares a menos de 50 metros y que el mas cercano es
-  Palacio de La Moneda, a unos 612 metros.
+  Hotel Bristol, a unos 302 metros.
 
 El radio de 50 metros se cambia en chungo/lugares/views.py (RADIO_METROS).
 
@@ -71,9 +72,39 @@ sesion (cookie de un ano). Otro navegador o una ventana de incognito tiene
 su propia lista. Si se borran las cookies, se pierde la lista.
 
 Modelo de datos: Lugar (1) --- (N) Favorito
-- Lugar: nombre, descripcion, foto, latitud, longitud y sus traducciones
+- Lugar: nombre, descripcion, foto, latitud, longitud, sus traducciones y
+  los datos de IDE Patrimonio (codigo_ide, categoria, desde_ide)
 - Favorito: visitante, lugar (llave foranea a Lugar), fecha
   Un visitante no puede guardar dos veces el mismo lugar.
+
+## Datos de IDE Patrimonio (API)
+
+Los lugares de Santiago Centro vienen de la API de IDE Patrimonio, la
+Infraestructura de Datos Espaciales de la Subsecretaria del Patrimonio
+Cultural (https://ide.patrimoniocultural.gob.cl). Se usa la capa "Puntos de
+Monumentos Nacionales" del Consejo de Monumentos Nacionales, filtrada por la
+comuna de Santiago (Santiago Centro): Monumentos Historicos y Zonas Tipicas.
+
+Para traer los datos (necesita internet), dentro de la carpeta chungo:
+
+    python manage.py importar_patrimonio
+
+- Trae nombre, categoria, coordenadas oficiales y foto de cada monumento.
+- La API no trae la historia de cada lugar, asi que se arma una descripcion
+  breve para turistas segun el tipo de lugar (iglesia, palacio, teatro,
+  sitio de memoria, barrio, etc.), con una recomendacion, en espanol, ingles
+  y portugues. Los textos estan en chungo/lugares/descripciones_turisticas.py
+- Para escribir un texto propio de un lugar: editarlo en /admin/ y desmarcar
+  "importado desde IDE Patrimonio", asi la importacion no lo cambia.
+- Se puede correr las veces que se quiera: actualiza sin duplicar.
+- Los 9 lugares escritos por el equipo (datos_lugares.json) conservan su
+  historia y su foto; solo se les ponen las coordenadas oficiales.
+- Solo se guardan los monumentos que tienen foto y que estan en Santiago
+  Centro o sus alrededores: a 2 km o menos de la Plaza de Armas
+  (RADIO_CENTRO_METROS en el comando).
+- La app funciona sin internet despues de importar: todo queda en la base
+  de datos y las fotos en chungo/media/lugares/.
+- El codigo esta en chungo/lugares/management/commands/importar_patrimonio.py
 
 ## Idiomas (espanol, ingles y portugues)
 
@@ -113,3 +144,4 @@ Despues de bajar este cambio hay que correr, dentro de la carpeta chungo:
   como respaldo)
 - Coleccion de favoritos guardada en la base de datos (modelo Favorito)
 - Traduccion al ingles y al portugues (selector ES / EN / PT)
+- Lugares de Santiago Centro importados desde la API de IDE Patrimonio

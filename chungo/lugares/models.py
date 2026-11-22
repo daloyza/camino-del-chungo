@@ -1,16 +1,24 @@
 from django.db import models
 
 class Lugar(models.Model):
-    nombre = models.CharField(max_length=100)
+    """Lugar histórico. Los 9 primeros los escribió el equipo (datos_lugares.json);
+    el resto viene del catálogo de Monumentos Nacionales de IDE Patrimonio."""
+
+    nombre = models.CharField(max_length=255)
     descripcion = models.TextField()
-    foto = models.ImageField(upload_to="lugares/")
+    foto = models.ImageField(upload_to="lugares/", blank=True)
     latitud = models.FloatField()
     longitud = models.FloatField()
 
+    # Datos de IDE Patrimonio (ver el comando importar_patrimonio)
+    codigo_ide = models.CharField("código en IDE Patrimonio", max_length=30, unique=True, null=True, blank=True)
+    categoria = models.CharField("categoría", max_length=60, blank=True)
+    desde_ide = models.BooleanField("importado desde IDE Patrimonio", default=False)
+
     # Traducciones (opcionales): si están vacías se muestra el texto en español
-    nombre_en = models.CharField("nombre en inglés", max_length=100, blank=True)
+    nombre_en = models.CharField("nombre en inglés", max_length=255, blank=True)
     descripcion_en = models.TextField("descripción en inglés", blank=True)
-    nombre_pt = models.CharField("nombre en portugués", max_length=100, blank=True)
+    nombre_pt = models.CharField("nombre en portugués", max_length=255, blank=True)
     descripcion_pt = models.TextField("descripción en portugués", blank=True)
 
     def __str__(self):

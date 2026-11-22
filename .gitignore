@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 db.sqlite3
 .env
+
+# Fotos que baja el comando importar_patrimonio (se bajan en cada computador)
+chungo/media/lugares/ide_*
