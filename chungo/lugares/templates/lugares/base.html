@@ -176,7 +176,7 @@
     </style>
     {% block estilos %}{% endblock %}
 </head>
-<body>
+<body class="{% block clase_pagina %}{% endblock %}">
     <header class="barra">
         <a class="marca" href="{% url 'lista' %}">El camino del chungo</a>
         <nav>

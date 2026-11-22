@@ -1,18 +1,72 @@
 {% extends "lugares/base.html" %}
 
+{% block clase_pagina %}pagina-lista{% endblock %}
+
+{% block estilos %}
+<style>
+    /* Versión clara: fondo y barra blancos (la versión oscura café se mantiene) */
+    @media not (prefers-color-scheme: dark) {
+        body.pagina-lista {
+            --fondo: #ffffff;
+            --barra: #ffffff;
+            --barra-texto: #1c2b3a;
+        }
+        body.pagina-lista .barra nav a:hover { background: #f1f4f7; }
+    }
+    body.pagina-lista .barra { border-bottom: 1px solid var(--borde); }
+
+    /* Lista de lugares: una columna en el celular, dos en pantallas grandes */
+    .grilla-lugares {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    @media (min-width: 600px) {
+        .grilla-lugares { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Toda la tarjeta es un enlace al lugar */
+    .lugar {
+        display: block;
+        color: var(--texto);
+        text-decoration: none;
+    }
+    .lugar .foto,
+    .lugar .sin-foto {
+        height: 200px;
+        max-height: none;
+        border-radius: 14px;
+        transition: opacity 0.2s;
+    }
+    .lugar:hover .foto { opacity: 0.85; }
+    .lugar h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 10px 2px 0;
+    }
+    .lugar:focus-visible {
+        outline: 3px solid var(--principal);
+        outline-offset: 4px;
+        border-radius: 14px;
+    }
+</style>
+{% endblock %}
+
 {% block contenido %}
 <h1>{{ t.lista_titulo }}</h1>
 
+<div class="grilla-lugares">
 {% for lugar in lugares %}
-    <div class="tarjeta">
+    <a class="lugar" href="{% url 'detalle' lugar.id %}">
         {% if lugar.foto %}
             <img class="foto" src="{{ lugar.foto.url }}" alt="{{ t.foto_de }} {{ lugar.nombre_mostrado }}">
         {% else %}
             <div class="sin-foto">{{ t.sin_foto }}</div>
         {% endif %}
-        <h2><a href="{% url 'detalle' lugar.id %}">{{ lugar.nombre_mostrado }}</a></h2>
-    </div>
+        <h2>{{ lugar.nombre_mostrado }}</h2>
+    </a>
 {% empty %}
     <p class="mensaje">{{ t.sin_lugares }}</p>
 {% endfor %}
+</div>
 {% endblock %}
