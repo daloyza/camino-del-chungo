@@ -59,6 +59,25 @@ Limitaciones:
 - El celular necesita HTTPS: con http://192.168.x.x no hay ubicacion ni avisos.
   En el computador funciona porque 127.0.0.1 cuenta como seguro.
 
+## Abrir la app en el celular (HTTPS con Cloudflare)
+
+El GPS y los avisos necesitan HTTPS. Para eso se usa un tunel de Cloudflare
+(no pide cuenta). Se instala una sola vez:
+
+    winget install --id Cloudflare.cloudflared -e
+
+Cada vez que se quiera usar:
+1. Encender el servidor (dentro de la carpeta chungo):
+     python manage.py runserver
+2. En otra terminal:
+     "C:\Program Files (x86)\cloudflared\cloudflared.exe" tunnel --url http://127.0.0.1:8000
+3. Copiar el link https://....trycloudflare.com que aparece y abrirlo en el
+   celular (con datos o cualquier wifi).
+
+- Funciona solo mientras el PC y las dos terminales esten encendidos.
+- El link cambia cada vez que se enciende el tunel.
+- Mientras esta encendido, cualquiera con el link puede entrar.
+
 ## Favoritos (persistencia de datos)
 
 1. Abrir un lugar, por ejemplo http://127.0.0.1:8000/lugar/1/

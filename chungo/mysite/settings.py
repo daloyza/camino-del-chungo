@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-g^)bfon@tg#!k4&dq$_+@5y=4=y6op$(l94af@s$rdvx0hf7=%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# Computador local + túnel HTTPS de Cloudflare (para abrir la app desde el celular)
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".trycloudflare.com"]
+CSRF_TRUSTED_ORIGINS = ["https://*.trycloudflare.com"]
+# El túnel entrega HTTPS: así Django sabe que la conexión es segura
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 
 # Application definition
